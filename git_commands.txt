@@ -1,0 +1,122 @@
+GIT COMMANDS USED IN THIS ASSIGNMENT
+====================================
+
+Step 1: Local repository setup
+------------------------------
+mkdir my-website
+    Creates the project folder.
+
+cd my-website
+    Moves into the project folder.
+
+git init -b main
+    Turns the folder into a Git repository and names the first branch "main".
+
+git status
+    Shows which files are untracked, modified or staged.
+
+
+Step 2: Git workflow
+--------------------
+git add index.html about.html
+    Stages the two HTML files so they go into the next commit.
+
+git commit -m "Initial commit: add index.html and about.html"
+    Saves the staged files as the first commit.
+
+git diff
+    Shows the changes made to tracked files that are not staged yet.
+
+git add index.html
+    Stages the edited homepage.
+
+git commit -m "Add welcome message to homepage"
+    Saves the homepage change as the second commit.
+
+git branch feature
+    Creates a new branch called "feature" at the current commit.
+
+git switch feature
+    Moves to the feature branch so new commits go there.
+
+git branch
+    Lists local branches. The one with * is the branch I am on.
+
+git add about.html
+    Stages the edited about page.
+
+git commit -m "Add team section to about page"
+    Saves the about page change as a commit on the feature branch.
+
+git switch main
+    Goes back to the main branch.
+
+git merge --no-ff feature -m "Merge feature branch into main"
+    Merges feature into main. --no-ff forces a merge commit, so the branch
+    stays visible in the history instead of being flattened.
+
+git log --oneline --graph --all --decorate
+    Prints the commit history as a compact graph with branch names.
+
+
+Step 3: .gitignore
+------------------
+cat .gitignore
+    Prints the .gitignore file (which contains *.log and temp/).
+
+git status --short
+    Shows a one-line-per-file status. debug.log and temp/ disappear from the
+    list once .gitignore is in place.
+
+git check-ignore -v debug.log temp/cache.txt
+    Shows which .gitignore rule is ignoring each file.
+
+git add .gitignore
+    Stages the .gitignore file.
+
+git commit -m "Add .gitignore for log files and temp folder"
+    Saves the .gitignore file as a commit.
+
+
+Step 4: Undo operation
+----------------------
+git add notes.txt
+    Stages a new file, notes.txt.
+
+git commit -m "Add notes file"
+    Makes the extra commit that will be undone.
+
+git log --oneline -3
+    Shows the last three commits.
+
+ls
+    Lists the files in the folder, to compare before and after the undo.
+
+git revert HEAD --no-edit
+    Undoes the last commit by creating a new commit that reverses it. History
+    is kept, so this is safe even for commits that are already pushed.
+
+git show --stat HEAD
+    Shows the revert commit and which file it changed.
+
+
+Step 5: GitHub integration
+--------------------------
+git add git_commands.txt
+    Stages this documentation file.
+
+git commit -m "Add git_commands.txt"
+    Saves this file as a commit.
+
+gh repo create git-workflow-assignment --public
+    Creates an empty public repository on GitHub with the GitHub CLI.
+
+git remote add origin https://github.com/Kash-app/git-workflow-assignment.git
+    Links the local repository to the GitHub repository under the name "origin".
+
+git remote -v
+    Lists the remotes, to check the link.
+
+git push -u origin --all
+    Pushes every local branch (main and feature) to GitHub and sets main to
+    track origin/main.
